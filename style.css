@@ -1,68 +1,68 @@
 @import './variables.css';
 
-body{
-    background-image: var(--main-bg-gradient)
-} 
-
-html{
-    font-family: Roboto, sans-serif;
+body {
+  background-image: var(--main-bg-gradient);
 }
 
-input{
-    margin: 5px 0;
+html {
+  font-family: Roboto, sans-serif;
 }
 
-main{
-    min-height: 100vh;
+input {
+  margin: 5px 0;
 }
 
-.container{
-    width: 100%;
-    margin: 0 auto;
-    padding: 30px 10px;
+main {
+  min-height: 100vh;
 }
 
-.flex{
-    display: flex;
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 30px 10px;
 }
 
-.flex--space-between{
-    justify-content: space-between;
+.flex {
+  display: flex;
 }
 
-.text--center{
-    text-align: center;
+.flex--space-between {
+  justify-content: space-between;
 }
 
-.app__logo{
-    width: 150px;
-    height: 150px;
-    margin: 30px auto;
+.text--center {
+  text-align: center;
 }
 
-.app__logo img{
-    width: 100%;
-    height: auto;
+.app__logo {
+  width: 150px;
+  height: 150px;
+  margin: 30px auto;
 }
 
-h1{
-    color: var(--peach);
-    font-size: var(--font-xl);
-    font-weight: 700;
+.app__logo img {
+  width: 100%;
+  height: auto;
 }
 
-h2{
-    font-size: var(--font-m);
-    font-weight: 700;
+h1 {
+  color: var(--peach);
+  font-size: var(--font-xl);
+  font-weight: 700;
 }
 
-.budget__state{
-    font-size: var(--font-l);
-    font-weight: 700;
+h2 {
+  font-size: var(--font-m);
+  font-weight: 700;
 }
 
-.budget__state--success{
-    color: var(--success);
+.budget__state {
+  font-size: var(--font-l);
+  font-weight: 700;
+}
+
+.budget__state--success {
+  color: var(--success);
 }
 
 /* This class can be used when the budget value is 0 
@@ -75,81 +75,79 @@ h2{
     color: var(--danger)
 } */
 
-.budget__list__wrapper{
-    margin: 30px 0;
-    flex-direction: column;
+.budget__list__wrapper {
+  margin: 30px 0;
+  flex-direction: column;
 }
 
-.budget__incomes, 
-.budget__expenses{
-    margin-top: 30px;
+.budget__incomes,
+.budget__expenses {
+  margin-top: 30px;
 }
 
-.budget__list{
-    padding: 20px 0;
-    border-top: 1px solid var(--deep-blue);
-    border-bottom: 1px solid var(--deep-blue);
+.budget__list {
+  padding: 20px 0;
+  border-top: 1px solid var(--deep-blue);
+  border-bottom: 1px solid var(--deep-blue);
 }
 
-.incomes__header{
-    color: var(--golden);
+.incomes__header {
+  color: var(--golden);
 }
 
-.expenses__header{
-    color: var(--orange);
+.expenses__header {
+  color: var(--orange);
 }
 
-.budget__list__form{
-    margin: 15px 0;
+.budget__list__form {
+  margin: 15px 0;
 }
 
-.budget__list__form__input{
-    font-size: var(--font-sm);
-    line-height: 24px;
-    border: none;
+.budget__list__form__input {
+  font-size: var(--font-sm);
+  line-height: 24px;
+  border: 2px solid black;
 }
 
-.budget__list__form__input--text{
-    width: 270px;
+.budget__list__form__input--text {
+  width: 270px;
 }
 
-.budget__list__form__input--number{
-    width: 80px
+.budget__list__form__input--number {
+  width: 80px;
 }
 
-.budget__list__form__input__button{
-    padding: 3px 20px;
-    border: none;
-    background-color: var(--deep-blue);
-    color: var(--white);
-    font-size: var(--font-sm);
-    font-weight: 700;
+.budget__list__form__input__button {
+  padding: 3px 20px;
+  border: none;
+  background-color: var(--deep-blue);
+  color: var(--white);
+  font-size: var(--font-sm);
+  font-weight: 700;
 }
 
-.budget__list__summary{
-    margin-top: 30px;
-    border-bottom: 1px solid var(--success);
-    color: var(--deep-blue);
-    font-size: var(--font-sm);
-    font-weight: 700;
+.budget__list__summary {
+  margin-top: 30px;
+  border-bottom: 1px solid var(--success);
+  color: var(--deep-blue);
+  font-size: var(--font-sm);
+  font-weight: 700;
 }
 
-@media screen and (min-width: 1024px){
-    .container{
-        width: 960px;
-    }
+@media screen and (min-width: 1024px) {
+  .container {
+    width: 960px;
+  }
 
-    .budget__list__wrapper{
-        flex-direction: row;
-    }
+  .budget__list__wrapper {
+    flex-direction: row;
+  }
 
-    .budget__incomes, 
-    .budget__expenses{
-        margin-top: 0;
-    }
+  .budget__incomes,
+  .budget__expenses {
+    margin-top: 0;
+  }
 }
-
-
 
 /* A SAMPLE STYLING OF BUDGET LIST ITEM
 
@@ -185,14 +183,14 @@ h2{
     }
 } */
 
-footer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
-.icon__credentials{
-    color: var(--white);
-    font-size: var(--font-s);
+.icon__credentials {
+  color: var(--white);
+  font-size: var(--font-s);
 }

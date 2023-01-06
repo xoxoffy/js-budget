@@ -22,33 +22,22 @@ incomesValueSpan.textContent = totalIncomeSum;
 // Expense elements
 const expenseForm = document.getElementById('expenseForm');
 
-const expensesList = document.getElementById('expensesList');
+const ulExpensesList = document.getElementById('expensesList');
 const expensesValueSpan = document.getElementById('expensesValue');
 
 expensesValueSpan.textContent = totalIncomeSum;
 
-// Income logic
+// Helper functions
 
-/* A SAMPLE BUDGET LIST INCOME ITEM
-<li class="flex flex--space-between budget__list__item">
-    <p>Text input value <span>number input value</span> PLN</p>
-    <div class="budget__list__item__buttons__wrapper">
-        <button class="budget__list__item__button budget__list__item__button--edit">Edit</button>
-        <button class="budget__list__item__button budget__list__item__button--delete">Delete</button>
-    </div>
-*/
-const addNewIncome = () => {
-  const incomeTitleValue = document.getElementById('incomeTitle').value;
-  const incomeAmountValue = document.getElementById('incomeValue').value;
-
-  if (!incomeAmountValue || !incomeTitleValue) return;
-
-  // Create income list item
+const addListItem = (titleValue, amountValue, listType) => {
   const liNode = document.createElement('li');
   liNode.className = 'flex flex--space-between budget__list__item';
 
   const pNode = document.createElement('p');
-  pNode.innerHTML = `${incomeTitleValue} <span>${incomeAmountValue}</span> PLN`;
+
+  const pId = Math.random().toString(16).slice(2);
+  pNode.id = pId;
+  pNode.innerHTML = `${titleValue} <span>${amountValue}</span> PLN`;
 
   const divNode = document.createElement('div');
   divNode.className = 'budget__list__item__buttons__wrapper';
@@ -58,10 +47,42 @@ const addNewIncome = () => {
     'budget__list__item__button budget__list__item__button--edit';
   editButton.textContent = 'Edit';
 
+  //   editButton.onclick = () => {
+  //     const newIncomeTitleValue = document.getElementById('incomeTitle').value;
+  //     const newIncomeAmountValue = document.getElementById('incomeValue').value;
+
+  //     if (pNode.id === pId) {
+  //       pNode.innerHTML = `${newIncomeTitleValue} <span>${newIncomeAmountValue} PLN`;
+  //     }
+
+  //     amountValue = parseInt(newIncomeAmountValue);
+
+  //     totalIncomeSum = amountValue;
+  //     totalPLN = amountValue;
+  //     incomesValueSpan.textContent = totalIncomeSum;
+  //     budgetValueSpan.textContent = totalPLN;
+  //   };
+
   const deleteButton = document.createElement('button');
   deleteButton.className =
     'budget__list__item__button budget__list__item__button--delete';
   deleteButton.textContent = 'Delete';
+
+  deleteButton.onclick = () => {
+    if (pNode.id === pId && listType === ulIncomesList) {
+      liNode.remove();
+      totalIncomeSum = totalIncomeSum - amountValue;
+      totalPLN = totalPLN - amountValue;
+      incomesValueSpan.textContent = totalIncomeSum;
+      budgetValueSpan.textContent = totalPLN;
+    } else if (pNode.id === pId && listType === ulExpensesList) {
+      liNode.remove();
+      totalExpenseSum = totalExpenseSum + parseInt(amountValue);
+      totalPLN = totalPLN + parseInt(amountValue);
+      expensesValueSpan.textContent = Math.abs(totalExpenseSum);
+      budgetValueSpan.textContent = totalPLN;
+    }
+  };
 
   divNode.appendChild(editButton);
   divNode.appendChild(deleteButton);
@@ -69,7 +90,15 @@ const addNewIncome = () => {
   liNode.appendChild(pNode);
   liNode.appendChild(divNode);
 
-  ulIncomesList.appendChild(liNode);
+  listType.appendChild(liNode);
+};
+
+// Income logic
+const addNewIncome = () => {
+  const incomeTitleValue = document.getElementById('incomeTitle').value;
+  const incomeAmountValue = document.getElementById('incomeValue').value;
+
+  if (!incomeAmountValue || !incomeTitleValue) return;
 
   // Calculations
   totalIncomeSum = totalIncomeSum + parseInt(incomeAmountValue);
@@ -78,8 +107,7 @@ const addNewIncome = () => {
   incomesValueSpan.textContent = totalIncomeSum;
   budgetValueSpan.textContent = totalPLN;
 
-  console.log(incomeTitleValue);
-  console.log(incomeAmountValue);
+  addListItem(incomeTitleValue, incomeAmountValue, ulIncomesList);
 };
 
 incomeForm.addEventListener('submit', (event) => {
@@ -93,16 +121,15 @@ const addNewExpense = () => {
   const expenseTitleValue = document.getElementById('expenseTitle').value;
   const expenseAmountValue = document.getElementById('expenseValue').value;
 
-  if (!expenseAmountValue) return;
+  if (!expenseAmountValue || !expenseTitleValue) return;
 
   totalExpenseSum = totalExpenseSum - parseInt(expenseAmountValue);
   totalPLN = totalPLN - parseInt(expenseAmountValue);
 
-  expensesValueSpan.textContent = totalExpenseSum;
+  expensesValueSpan.textContent = Math.abs(totalExpenseSum);
   budgetValueSpan.textContent = totalPLN;
 
-  console.log(expenseTitleValue);
-  console.log(expenseAmountValue);
+  addListItem(expenseTitleValue, expenseAmountValue, ulExpensesList);
 };
 expenseForm.addEventListener('submit', (event) => {
   event.preventDefault();

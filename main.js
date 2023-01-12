@@ -8,6 +8,7 @@ let totalExpenseSum = 0;
 // Budget elements
 const budgetValueSpan = document.getElementById('budgetValue');
 const budgetStateDiv = document.getElementById('budgetState');
+const budgetStateText = document.getElementById('budgetStateText');
 
 budgetValueSpan.textContent = totalPLN;
 
@@ -82,6 +83,7 @@ const addListItem = (titleValue, amountValue, listType) => {
       expensesValueSpan.textContent = Math.abs(totalExpenseSum);
       budgetValueSpan.textContent = totalPLN;
     }
+    budgetCheck();
   };
 
   divNode.appendChild(editButton);
@@ -91,6 +93,21 @@ const addListItem = (titleValue, amountValue, listType) => {
   liNode.appendChild(divNode);
 
   listType.appendChild(liNode);
+};
+
+const budgetCheck = () => {
+  if (totalPLN === 0) {
+    budgetStateDiv.className = 'budget__state budget__state--warning';
+    budgetStateText.textContent = `Your balance is zero.`;
+  } else if (totalPLN < 0) {
+    budgetStateDiv.className = 'budget__state budget__state--danger';
+    budgetStateText.textContent = `You are on the negative balance by ${Math.abs(
+      totalPLN
+    )} PLN!`;
+  } else {
+    budgetStateDiv.className = 'budget__state budget__state--success';
+    budgetStateText.textContent = `You can still spend ${totalPLN} PLN`;
+  }
 };
 
 // Income logic
@@ -114,6 +131,7 @@ incomeForm.addEventListener('submit', (event) => {
   event.preventDefault();
 
   addNewIncome();
+  budgetCheck();
 });
 
 // Expense logic
@@ -135,4 +153,5 @@ expenseForm.addEventListener('submit', (event) => {
   event.preventDefault();
 
   addNewExpense();
+  budgetCheck();
 });

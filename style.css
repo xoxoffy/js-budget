@@ -65,15 +65,13 @@ h2 {
   color: var(--success);
 }
 
-/* This class can be used when the budget value is 0 
-.budget__state--warning{
-    color: var(--warning)
-} */
+.budget__state--warning {
+  color: var(--warning);
+}
 
-/* This class can be used when the budget value is below 0
-.budget__state--danger{
-    color: var(--danger)
-} */
+.budget__state--danger {
+  color: var(--danger);
+}
 
 .budget__list__wrapper {
   margin: 30px 0;

@@ -53,13 +53,14 @@ const addListItem = (titleValue, amountValue, listType) => {
       const newIncomeTitleValue = document.getElementById('incomeTitle').value;
       const newIncomeAmountValue = document.getElementById('incomeValue').value;
 
+      if (!newIncomeTitleValue || !newIncomeAmountValue) return;
+
       pNode.innerHTML = `${newIncomeTitleValue} <span>${newIncomeAmountValue} PLN`;
 
       totalIncomeSum =
         totalIncomeSum - parseInt(amountValue) + parseInt(newIncomeAmountValue);
       amountValue = newIncomeAmountValue;
       totalPLN = parseInt(totalIncomeSum) + parseInt(totalExpenseSum);
-      console.log(amountValue);
 
       incomesValueSpan.textContent =
         parseInt(totalIncomeSum) - parseInt(totalExpenseSum);
@@ -68,6 +69,8 @@ const addListItem = (titleValue, amountValue, listType) => {
         document.getElementById('expenseTitle').value;
       const newExpenseAmountValue =
         document.getElementById('expenseValue').value;
+
+      if (!newExpenseTitleValue || !newExpenseAmountValue) return;
 
       pNode.innerHTML = `${newExpenseTitleValue} <span>${newExpenseAmountValue} PLN`;
 

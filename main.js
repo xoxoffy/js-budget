@@ -55,11 +55,14 @@ const addListItem = (titleValue, amountValue, listType) => {
 
       pNode.innerHTML = `${newIncomeTitleValue} <span>${newIncomeAmountValue} PLN`;
 
-      totalIncomeSum = parseInt(newIncomeAmountValue) + parseInt(amountValue);
-      totalPLN = parseInt(newIncomeAmountValue) + parseInt(amountValue);
+      totalIncomeSum =
+        totalIncomeSum - parseInt(amountValue) + parseInt(newIncomeAmountValue);
+      amountValue = newIncomeAmountValue;
+      totalPLN = parseInt(totalIncomeSum) + parseInt(totalExpenseSum);
       console.log(amountValue);
 
-      incomesValueSpan.textContent = totalIncomeSum - totalExpenseSum;
+      incomesValueSpan.textContent =
+        parseInt(totalIncomeSum) - parseInt(totalExpenseSum);
     } else if (pNode.id === pId && listType === ulExpensesList) {
       const newExpenseTitleValue =
         document.getElementById('expenseTitle').value;
@@ -69,9 +72,10 @@ const addListItem = (titleValue, amountValue, listType) => {
       pNode.innerHTML = `${newExpenseTitleValue} <span>${newExpenseAmountValue} PLN`;
 
       totalExpenseSum = parseInt(newExpenseAmountValue) - parseInt(amountValue);
-      totalPLN = parseInt(newExpenseAmountValue) - parseInt(amountValue);
+      totalPLN = parseInt(totalIncomeSum) + parseInt(totalExpenseSum);
 
-      expensesValueSpan.textContent = totalExpenseSum - totalIncomeSum;
+      expensesValueSpan.textContent =
+        parseInt(totalExpenseSum) - parseInt(totalIncomeSum);
     }
     budgetCheck();
   };
@@ -85,13 +89,13 @@ const addListItem = (titleValue, amountValue, listType) => {
     if (pNode.id === pId && listType === ulIncomesList) {
       liNode.remove();
       totalIncomeSum = totalIncomeSum - amountValue;
-      totalPLN = totalPLN - amountValue;
+      totalPLN = parseInt(totalIncomeSum) + parseInt(totalExpenseSum);
       incomesValueSpan.textContent = totalIncomeSum;
       budgetValueSpan.textContent = totalPLN;
     } else if (pNode.id === pId && listType === ulExpensesList) {
       liNode.remove();
       totalExpenseSum = totalExpenseSum + parseInt(amountValue);
-      totalPLN = totalPLN + parseInt(amountValue);
+      totalPLN = parseInt(totalIncomeSum) + parseInt(totalExpenseSum);
       expensesValueSpan.textContent = Math.abs(totalExpenseSum);
       budgetValueSpan.textContent = totalPLN;
     }
@@ -131,7 +135,7 @@ const addNewIncome = () => {
 
   // Calculations
   totalIncomeSum = totalIncomeSum + parseInt(incomeAmountValue);
-  totalPLN = totalPLN + parseInt(incomeAmountValue);
+  totalPLN = parseInt(totalIncomeSum) + parseInt(totalExpenseSum);
 
   incomesValueSpan.textContent = totalIncomeSum;
   budgetValueSpan.textContent = totalPLN;
@@ -154,7 +158,7 @@ const addNewExpense = () => {
   if (!expenseAmountValue || !expenseTitleValue) return;
 
   totalExpenseSum = totalExpenseSum - parseInt(expenseAmountValue);
-  totalPLN = totalPLN - parseInt(expenseAmountValue);
+  totalPLN = parseInt(totalIncomeSum) + parseInt(totalExpenseSum);
 
   expensesValueSpan.textContent = Math.abs(totalExpenseSum);
   budgetValueSpan.textContent = totalPLN;

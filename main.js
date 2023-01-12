@@ -48,21 +48,33 @@ const addListItem = (titleValue, amountValue, listType) => {
     'budget__list__item__button budget__list__item__button--edit';
   editButton.textContent = 'Edit';
 
-  //   editButton.onclick = () => {
-  //     const newIncomeTitleValue = document.getElementById('incomeTitle').value;
-  //     const newIncomeAmountValue = document.getElementById('incomeValue').value;
+  editButton.onclick = () => {
+    if (pNode.id === pId && listType === ulIncomesList) {
+      const newIncomeTitleValue = document.getElementById('incomeTitle').value;
+      const newIncomeAmountValue = document.getElementById('incomeValue').value;
 
-  //     if (pNode.id === pId) {
-  //       pNode.innerHTML = `${newIncomeTitleValue} <span>${newIncomeAmountValue} PLN`;
-  //     }
+      pNode.innerHTML = `${newIncomeTitleValue} <span>${newIncomeAmountValue} PLN`;
 
-  //     amountValue = parseInt(newIncomeAmountValue);
+      totalIncomeSum = parseInt(newIncomeAmountValue) + parseInt(amountValue);
+      totalPLN = parseInt(newIncomeAmountValue) + parseInt(amountValue);
+      console.log(amountValue);
 
-  //     totalIncomeSum = amountValue;
-  //     totalPLN = amountValue;
-  //     incomesValueSpan.textContent = totalIncomeSum;
-  //     budgetValueSpan.textContent = totalPLN;
-  //   };
+      incomesValueSpan.textContent = totalIncomeSum - totalExpenseSum;
+    } else if (pNode.id === pId && listType === ulExpensesList) {
+      const newExpenseTitleValue =
+        document.getElementById('expenseTitle').value;
+      const newExpenseAmountValue =
+        document.getElementById('expenseValue').value;
+
+      pNode.innerHTML = `${newExpenseTitleValue} <span>${newExpenseAmountValue} PLN`;
+
+      totalExpenseSum = parseInt(newExpenseAmountValue) - parseInt(amountValue);
+      totalPLN = parseInt(newExpenseAmountValue) - parseInt(amountValue);
+
+      expensesValueSpan.textContent = totalExpenseSum - totalIncomeSum;
+    }
+    budgetCheck();
+  };
 
   const deleteButton = document.createElement('button');
   deleteButton.className =

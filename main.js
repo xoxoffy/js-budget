@@ -48,7 +48,7 @@ const addListItem = (titleValue, amountValue, listType) => {
     'budget__list__item__button budget__list__item__button--edit';
   editButton.textContent = 'Edit';
 
-  editButton.onclick = () => {
+  const editExpense = () => {
     if (pNode.id === pId && listType === ulIncomesList) {
       const newIncomeTitleValue = document.getElementById('incomeTitle').value;
       const newIncomeAmountValue = document.getElementById('incomeValue').value;
@@ -83,12 +83,14 @@ const addListItem = (titleValue, amountValue, listType) => {
     budgetCheck();
   };
 
+  editButton.addEventListener('click', editExpense);
+
   const deleteButton = document.createElement('button');
   deleteButton.className =
     'budget__list__item__button budget__list__item__button--delete';
   deleteButton.textContent = 'Delete';
 
-  deleteButton.onclick = () => {
+  const deleteExpense = () => {
     if (pNode.id === pId && listType === ulIncomesList) {
       liNode.remove();
       totalIncomeSum = totalIncomeSum - amountValue;
@@ -104,6 +106,8 @@ const addListItem = (titleValue, amountValue, listType) => {
     }
     budgetCheck();
   };
+
+  deleteButton.addEventListener('click', deleteExpense);
 
   divNode.appendChild(editButton);
   divNode.appendChild(deleteButton);
@@ -154,6 +158,7 @@ incomeForm.addEventListener('submit', (event) => {
 });
 
 // Expense logic
+
 const addNewExpense = () => {
   const expenseTitleValue = document.getElementById('expenseTitle').value;
   const expenseAmountValue = document.getElementById('expenseValue').value;
@@ -168,6 +173,7 @@ const addNewExpense = () => {
 
   addListItem(expenseTitleValue, expenseAmountValue, ulExpensesList);
 };
+
 expenseForm.addEventListener('submit', (event) => {
   event.preventDefault();
 

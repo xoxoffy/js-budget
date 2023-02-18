@@ -49,6 +49,7 @@ const addListItem = (titleValue, amountValue, listType) => {
   editButton.textContent = 'Edit';
 
   const editExpense = () => {
+    // Edit Income
     if (pNode.id === pId && listType === ulIncomesList) {
       const newIncomeTitleValue = document.getElementById('incomeTitle').value;
       const newIncomeAmountValue = document.getElementById('incomeValue').value;
@@ -57,6 +58,8 @@ const addListItem = (titleValue, amountValue, listType) => {
 
       pNode.innerHTML = `${newIncomeTitleValue} <span>${newIncomeAmountValue} PLN`;
 
+      console.log(amountValue);
+
       totalIncomeSum =
         totalIncomeSum - parseInt(amountValue) + parseInt(newIncomeAmountValue);
       amountValue = newIncomeAmountValue;
@@ -64,6 +67,8 @@ const addListItem = (titleValue, amountValue, listType) => {
 
       incomesValueSpan.textContent =
         parseInt(totalIncomeSum) - parseInt(totalExpenseSum);
+
+      // Edit Expense
     } else if (pNode.id === pId && listType === ulExpensesList) {
       const newExpenseTitleValue =
         document.getElementById('expenseTitle').value;
@@ -73,8 +78,12 @@ const addListItem = (titleValue, amountValue, listType) => {
       if (!newExpenseTitleValue || !newExpenseAmountValue) return;
 
       pNode.innerHTML = `${newExpenseTitleValue} <span>${newExpenseAmountValue} PLN`;
+      totalExpenseSum =
+        totalExpenseSum -
+        parseInt(amountValue) +
+        parseInt(newExpenseAmountValue);
 
-      totalExpenseSum = parseInt(newExpenseAmountValue) - parseInt(amountValue);
+      amountValue = newExpenseAmountValue;
       totalPLN = parseInt(totalIncomeSum) + parseInt(totalExpenseSum);
 
       expensesValueSpan.textContent =
